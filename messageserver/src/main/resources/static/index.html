@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Test</title>
+</head>
+<body>
+    <h2>WebSocket Test</h2>
+    <input type="text" id="message" placeholder="Enter message">
+    <button onclick="sendMessage()">Send</button>
+
+    <script type="text/javascript">
+        var socket = new WebSocket("ws://localhost:8080/websocket-endpoint");
+
+        socket.onopen = function() {
+            console.log("Connected");
+        };
+
+        socket.onmessage = function(event) {
+            console.log("Received: " + event.data);
+        };
+
+        function sendMessage() {
+            var message = document.getElementById("message").value;
+            socket.send(message);
+        }
+    </script>
+</body>
+</html>
